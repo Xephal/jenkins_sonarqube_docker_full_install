@@ -8,6 +8,8 @@ services:
       - "50000:50000"
     networks:
       - devops
+    volumes:
+      - jenkins_home:/var/jenkins_home # Volume pour la persistance des données Jenkins
   
   postgres:
     container_name: postgres_container
@@ -24,6 +26,8 @@ services:
       timeout: 10s
     networks:
       - devops
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Volume pour la persistance des données PostgreSQL
 
   sonarqube:
     container_name: sonarqube_container
@@ -45,3 +49,7 @@ networks:
   devops:
     driver: bridge
     name: devops
+
+volumes:
+  jenkins_home: # Déclare le volume Jenkins
+  postgres_data: # Déclare le volume PostgreSQL
